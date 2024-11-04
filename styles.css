@@ -1,19 +1,31 @@
 /* styles.css */
 
+/* 整個頁面基本設置 */
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
+    padding: 0;
     background-color: #f4f4f9;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
 }
 
-h1 {
+/* 標題的樣式，使其固定在頂部 */
+header {
+    width: 100%;
+    background-color: #f4f4f9; /* 背景色與頁面一致 */
     text-align: center;
+    padding: 20px 0; /* 標題的上下間距 */
+    position: fixed; /* 固定在頁面頂部 */
+    top: 0;
+    left: 0;
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
 }
 
+/* 計算器容器的樣式 */
 .calculator {
     background-color: white;
     padding: 20px;
@@ -21,8 +33,14 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 300px;
     text-align: center;
+    margin-top: 150px; /* 確保計算器在中間部分 */
+    flex-grow: 1; /* 讓計算器在中間 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
+/* 標籤與輸入框的樣式 */
 label {
     display: block;
     margin-top: 10px;
@@ -37,6 +55,7 @@ input {
     border-radius: 4px;
 }
 
+/* 按鈕的樣式 */
 button {
     width: 100%;
     padding: 10px;
@@ -51,6 +70,7 @@ button:hover {
     background-color: #45a049;
 }
 
+/* 用於顯示結果的區域 */
 #result {
     margin-top: 20px;
     font-size: 1.2em;

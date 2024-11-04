@@ -1,3 +1,15 @@
+document.addEventListener("DOMContentLoaded", function() {
+    // 在 DOM 完全加載後設置事件監聽器
+    const weightInput = document.getElementById("weight");
+
+    // 當用戶在 "weight" 輸入框中按下鍵時觸發
+    weightInput.addEventListener("keyup", function(event) {
+        if (event.key === "Enter") {  // 檢查是否按下 Enter 鍵
+            calculateAndDisplayBMI();
+        }
+    });
+});
+
 function calculateAndDisplayBMI() {
     // 取得身高和體重的值
     const height = parseFloat(document.getElementById("height").value);
@@ -30,11 +42,10 @@ function uploadDataToGoogleSheet(height, weight, bmi) {
         body: JSON.stringify({ height, weight, bmi }),
     })
     .then(() => {
-        // 由於 no-cors 模式，我們無法查看回應內容，但假設請求已經成功
+        // 由於 no-cors 模式，我們無法查看回應內容，僅打印日志以供調試
         console.log("數據已提交到 Google Sheets");
     })
     .catch(error => {
         console.error("Error:", error);
-        alert("出現錯誤，無法儲存數據。");
     });
 }

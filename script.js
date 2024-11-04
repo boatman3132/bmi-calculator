@@ -1,34 +1,33 @@
-// script.js
-
 function calculateBMI() {
     // 取得身高和體重的值
     const height = parseFloat(document.getElementById("height").value);
     const weight = parseFloat(document.getElementById("weight").value);
-    const resultDiv = document.getElementById("result");
 
-    // 驗證輸入值是否有效
     if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
-        resultDiv.textContent = "請輸入有效的身高和體重數值！";
-        resultDiv.style.color = "red";
+        alert("請輸入有效的身高和體重數值！");
         return;
     }
 
     // 計算 BMI
     const bmi = weight / ((height / 100) ** 2);
-    let status;
+    fetch("https://script.google.com/macros/s/AKfycbwhatd4F_laKeT937WY3MQNyCuI0jEeBfQWzP27mB1bJJp4M4Ul7JA7G1Hmc1ldRwbipw/exec", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        mode: "no-cors", // 避免 CORS 問題
+        body: JSON.stringify({ height, weight, bmi }),
+    })
+    .then(() => {
+        // 因為 'no-cors' 模式無法檢查回應內容，直接顯示成功
+        alert("數據已儲存到 Google Sheets！");
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("出現錯誤，無法儲存數據。");
+    });
+    
+    
 
-    // 根據 BMI 數值決定健康狀態
-    if (bmi < 18.5) {
-        status = "偏輕";
-        resultDiv.style.color = "blue";
-    } else if (bmi < 24) {
-        status = "正常";
-        resultDiv.style.color = "green";
-    } else {
-        status = "過重";
-        resultDiv.style.color = "red";
-    }
 
-    // 顯示結果
-    resultDiv.textContent = `您的 BMI 是 ${bmi.toFixed(2)}，狀態：${status}`;
 }
